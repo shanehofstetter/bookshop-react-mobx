@@ -25,7 +25,6 @@ class BookListItem extends React.Component {
             </div>
         )
     }
-
 }
 
 export default withNamespaces('translation')(BookListItem);

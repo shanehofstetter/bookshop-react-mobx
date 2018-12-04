@@ -30,4 +30,19 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  form:
+    submit: Save
+
+  link:
+    details: Details
+
+  activerecord:
+    models:
+      book:
+        one: Book
+        other: Books
+    attributes:
+      book:
+        title: Title
+        description: Description
+        isbn: ISBN

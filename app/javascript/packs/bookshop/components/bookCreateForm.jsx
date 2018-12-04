@@ -6,9 +6,10 @@ import Form from "./forms/form";
 import Text from "./forms/text";
 import TextArea from "./forms/textarea";
 import {withAlert} from "react-alert";
-import {connect} from "react-redux";
-import {add} from "../actions/bookActions";
+import {inject, observer} from "mobx-react";
 
+@inject('store')
+@observer
 class BookCreateForm extends React.Component {
     constructor(props) {
         super(props);
@@ -21,7 +22,7 @@ class BookCreateForm extends React.Component {
         Api.books.create(book).then(book => {
             this.setState({errors: {}});
             this.formApi.reset();
-            this.props.dispatch(add(book));
+            this.props.store.bookStore.addBook(book);
             this.props.alert.show(`Book '${book.title}' successfully added.`, {type: 'success'});
         }).catch(formErrors => {
             this.setState({errors: formErrors});
@@ -53,10 +54,7 @@ class BookCreateForm extends React.Component {
     }
 }
 
-const mapStateToProps = () => ({});
-
 const i18nEnhanced = withNamespaces('translation')(BookCreateForm);
 const alertEnhanced = withAlert(i18nEnhanced);
-const stateEnhanced = connect(mapStateToProps)(alertEnhanced);
 
-export default stateEnhanced;
+export default alertEnhanced;

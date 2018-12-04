@@ -4,9 +4,10 @@ import {withNamespaces} from 'react-i18next';
 import BookCreateForm from "./bookCreateForm";
 import {Col, Row} from "reactstrap";
 import {ActionCable} from 'react-actioncable-provider';
-import {connect} from "react-redux";
-import {add, load} from "../actions/bookActions";
+import {inject, observer} from "mobx-react";
 
+@inject('store')
+@observer
 class BookList extends React.Component {
 
     constructor(props) {
@@ -15,12 +16,12 @@ class BookList extends React.Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(load());
+        this.props.store.bookStore.loadBooks();
     }
 
     handleReceivedBook(response) {
         if (response.action === 'created') {
-            this.props.dispatch(add(response.book));
+            this.props.store.bookStore.addBook(response.book);
         }
     }
 
@@ -40,7 +41,7 @@ class BookList extends React.Component {
                         <BookCreateForm/>
                     </Col>
                     <Col md={12}>
-                        {this.props.books.map((book, index) => <BookListItem key={index} book={book}/>)}
+                        {this.props.store.bookStore.books.map((book, index) => <BookListItem key={index} book={book}/>)}
                     </Col>
                 </Row>
             </div>
@@ -48,11 +49,4 @@ class BookList extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        books: state.books.books,
-        isLoading: state.books.isLoading
-    }
-};
-
-export default connect(mapStateToProps)(withNamespaces('translation')(BookList));
+export default withNamespaces('translation')(BookList);
