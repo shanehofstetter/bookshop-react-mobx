@@ -4,7 +4,7 @@ import {withNamespaces} from 'react-i18next';
 import BookCreateForm from "./bookCreateForm";
 import {ActionCable} from 'react-actioncable-provider';
 import {inject, observer} from "mobx-react";
-import {Dimmer, Grid, Item, Loader} from "semantic-ui-react";
+import {Grid, Item, Placeholder, Segment} from "semantic-ui-react";
 
 @inject('store')
 @observer
@@ -42,15 +42,45 @@ class BookList extends React.Component {
                     </Grid.Column>
                     <Grid.Column>
                         <Item.Group>
-                            {this.props.store.bookStore.isLoading ?
-                                <Dimmer active inverted><Loader inverted>Loading</Loader></Dimmer>
-                                : this.props.store.bookStore.books.map((book, index) => <BookListItem key={index}
-                                                                                                      book={book}/>)}
+                            {this.props.store.bookStore.isLoading ? this.renderLoading() : this.renderBookList()}
                         </Item.Group>
                     </Grid.Column>
                 </Grid>
             </div>
         )
+    }
+
+    renderLoading() {
+        return <React.Fragment>
+            <Segment>
+                <Placeholder>
+                    <Placeholder.Header>
+                        <Placeholder.Line />
+                    </Placeholder.Header>
+                    <Placeholder.Paragraph>
+                        <Placeholder.Line />
+                        <Placeholder.Line />
+                    </Placeholder.Paragraph>
+                </Placeholder>
+            </Segment>
+            <Segment>
+                <Placeholder>
+                    <Placeholder.Header>
+                        <Placeholder.Line />
+                    </Placeholder.Header>
+                    <Placeholder.Paragraph>
+                        <Placeholder.Line />
+                        <Placeholder.Line />
+                    </Placeholder.Paragraph>
+                </Placeholder>
+            </Segment>
+        </React.Fragment>;
+    }
+
+    renderBookList() {
+        return this.props.store.bookStore.books.map((book, index) => {
+            return <BookListItem key={index} book={book}/>;
+        });
     }
 }
 
