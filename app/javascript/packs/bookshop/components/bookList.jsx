@@ -2,9 +2,9 @@ import * as React from 'react';
 import BookListItem from './bookListItem';
 import {withNamespaces} from 'react-i18next';
 import BookCreateForm from "./bookCreateForm";
-import {Col, Row} from "reactstrap";
 import {ActionCable} from 'react-actioncable-provider';
 import {inject, observer} from "mobx-react";
+import {Dimmer, Grid, Item, Loader} from "semantic-ui-react";
 
 @inject('store')
 @observer
@@ -33,17 +33,22 @@ class BookList extends React.Component {
                     channel={{channel: 'BooksChannel'}}
                     onReceived={this.handleReceivedBook}
                 />
-                <Row>
-                    <Col md={12}>
+                <Grid columns={1}>
+                    <Grid.Column>
                         <h1>{t('activerecord.models.book.other')}</h1>
-                    </Col>
-                    <Col md={12}>
+                    </Grid.Column>
+                    <Grid.Column>
                         <BookCreateForm/>
-                    </Col>
-                    <Col md={12}>
-                        {this.props.store.bookStore.books.map((book, index) => <BookListItem key={index} book={book}/>)}
-                    </Col>
-                </Row>
+                    </Grid.Column>
+                    <Grid.Column>
+                        <Item.Group>
+                            {this.props.store.bookStore.isLoading ?
+                                <Dimmer active inverted><Loader inverted>Loading</Loader></Dimmer>
+                                : this.props.store.bookStore.books.map((book, index) => <BookListItem key={index}
+                                                                                                      book={book}/>)}
+                        </Item.Group>
+                    </Grid.Column>
+                </Grid>
             </div>
         )
     }

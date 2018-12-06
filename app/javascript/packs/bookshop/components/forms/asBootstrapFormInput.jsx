@@ -1,5 +1,6 @@
 import * as React from "react";
 import {addCssClass} from "./utils";
+import {Label} from "semantic-ui-react";
 
 const asBootstrapFormInput = (FormInput) => {
 
@@ -11,11 +12,11 @@ const asBootstrapFormInput = (FormInput) => {
 
             className = addCssClass(className, 'form-control');
             if (invalid) {
-                className = addCssClass(className, 'is-invalid');
+                className = addCssClass(className, 'error');
             }
             return <React.Fragment>
                 <FormInput {...rest} className={className}/>
-                {invalid ? <div className="invalid-feedback">{errors.join(' ')}</div> : ''}
+                {invalid ? <Label basic color='red' pointing>{errors.join(' ')}</Label> : ''}
             </React.Fragment>
         }
     };

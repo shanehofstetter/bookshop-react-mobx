@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Alert} from "reactstrap";
+import {Message} from "semantic-ui-react";
 
 class AlertTemplate extends React.Component {
 
@@ -9,11 +9,12 @@ class AlertTemplate extends React.Component {
         // message is the alert message...
         // close is a function that closes the alert
         const {style, options, message, close} = this.props;
+        const props = {[options.type]: true};
 
         return (
-            <Alert color={options.type} toggle={close}>
+            <Message {...props} onDismiss={close}>
                 {message}
-            </Alert>
+            </Message>
         )
     }
 }

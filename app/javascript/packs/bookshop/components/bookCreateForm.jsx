@@ -1,5 +1,4 @@
 import * as React from "react";
-import {Button, FormGroup, Label} from 'reactstrap';
 import {withNamespaces} from "react-i18next";
 import {Api} from "../middleware/api";
 import Form from "./forms/form";
@@ -7,6 +6,7 @@ import Text from "./forms/text";
 import TextArea from "./forms/textarea";
 import {withAlert} from "react-alert";
 import {inject, observer} from "mobx-react";
+import {Button} from "semantic-ui-react";
 
 @inject('store')
 @observer
@@ -36,19 +36,19 @@ class BookCreateForm extends React.Component {
 
     render() {
         const {t} = this.props;
-        return <Form onSubmit={this.handleOnSubmit} getApi={this.getFormApi} className={'mb-2 mt-2'}>
-            <FormGroup>
-                <Label for={'title'}>{t('activerecord.attributes.book.title')}*</Label>
+        return <Form onSubmit={this.handleOnSubmit} getApi={this.getFormApi} className={'ui form'}>
+            <div className={'field'}>
+                <label htmlFor={'title'}>{t('activerecord.attributes.book.title')}*</label>
                 <Text field="title" id={'title'} errors={this.state.errors.title}/>
-            </FormGroup>
-            <FormGroup>
-                <Label for={'description'}>{t('activerecord.attributes.book.description')}*</Label>
+            </div>
+            <div className={'field'}>
+                <label htmlFor={'description'}>{t('activerecord.attributes.book.description')}*</label>
                 <TextArea field="description" id={'description'} errors={this.state.errors.description}/>
-            </FormGroup>
-            <FormGroup>
-                <Label for={'isbn'}>{t('activerecord.attributes.book.isbn')}*</Label>
+            </div>
+            <div className={'field'}>
+                <label htmlFor={'isbn'}>{t('activerecord.attributes.book.isbn')}*</label>
                 <Text field="isbn" id={'isbn'} errors={this.state.errors.isbn}/>
-            </FormGroup>
+            </div>
             <Button type="submit">{t('form.submit')}</Button>
         </Form>
     }

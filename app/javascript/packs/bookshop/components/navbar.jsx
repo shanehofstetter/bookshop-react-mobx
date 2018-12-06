@@ -1,16 +1,6 @@
 import * as React from 'react';
-import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem
-} from 'reactstrap';
 import {withNamespaces} from "react-i18next";
+import {Container, Dropdown, Menu} from "semantic-ui-react";
 
 class NavigationBar extends React.Component {
     constructor(props) {
@@ -33,27 +23,21 @@ class NavigationBar extends React.Component {
 
         return (
             <div>
-                <Navbar color="light" light expand="md">
-                    <NavbarBrand href={'/'}>Bookshop</NavbarBrand>
-                    <NavbarToggler onClick={this.toggle}/>
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="ml-auto" navbar>
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav caret>
-                                    {i18n.language}
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                    {
-                                        ['de', 'en'].map(locale => {
-                                            return <DropdownItem key={locale}
-                                                                 onClick={() => i18n.changeLanguage(locale)}>{locale}</DropdownItem>;
-                                        })
-                                    }
-                                </DropdownMenu>
-                            </UncontrolledDropdown>
-                        </Nav>
-                    </Collapse>
-                </Navbar>
+                <Menu fixed='top' stackable>
+                    <Container>
+                        <Menu.Item header as={'a'} href={'/'}>Bookshop</Menu.Item>
+                        <Dropdown item simple text={i18n.language}>
+                            <Dropdown.Menu>
+                                {
+                                    ['de', 'en'].map(locale => {
+                                        return <Dropdown.Item key={locale}
+                                                             onClick={() => i18n.changeLanguage(locale)}>{locale}</Dropdown.Item>;
+                                    })
+                                }
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Container>
+                </Menu>
             </div>
         );
     }

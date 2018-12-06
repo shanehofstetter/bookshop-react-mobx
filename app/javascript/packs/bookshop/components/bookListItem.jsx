@@ -1,7 +1,6 @@
 import * as React from 'react';
-import {Link} from 'react-router-dom'
-import {Button, Card, CardText, CardTitle, CardBody} from 'reactstrap';
 import {withNamespaces} from "react-i18next";
+import {Button, Item, Segment} from "semantic-ui-react";
 
 class BookListItem extends React.Component {
 
@@ -12,17 +11,17 @@ class BookListItem extends React.Component {
     render() {
         const {t} = this.props;
         return (
-            <div className="book">
-                <Card>
-                    <CardBody>
-                        <CardTitle>{this.props.book.title}</CardTitle>
-                        <CardText>{this.props.book.description}</CardText>
-                        <Button outline color="primary">
-                            <Link to={`books/${this.props.book.id}`}>{t('link.details')}</Link>
+            <Segment>
+                <Item>
+                    <Item.Content>
+                        <Item.Header>{this.props.book.title}</Item.Header>
+                        <Item.Description>{this.props.book.description}</Item.Description>
+                        <Button primary as={'a'} href={`books/${this.props.book.id}`} style={{marginTop: 10}}>
+                            {t('link.details')}
                         </Button>
-                    </CardBody>
-                </Card>
-            </div>
+                    </Item.Content>
+                </Item>
+            </Segment>
         )
     }
 }
