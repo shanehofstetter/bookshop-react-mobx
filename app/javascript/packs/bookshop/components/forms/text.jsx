@@ -1,5 +1,5 @@
 import {Text as InformedText} from 'informed';
 import * as React from "react";
-import asBootstrapFormInput from "./asBootstrapFormInput";
+import withStyle from "./withStyle";
 
-export default asBootstrapFormInput(InformedText);
+export default withStyle(InformedText);

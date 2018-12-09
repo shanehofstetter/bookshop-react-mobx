@@ -9,11 +9,11 @@ import App from "./app";
 import NotFound from "./components/notFound";
 import {Provider} from "mobx-react";
 import DevTool from 'mobx-react-devtools';
-import {RootStore} from "./stores/rootStore";
+import {rootStoreInstance} from "./stores/rootStore";
 
 class Root extends React.Component {
     render() {
-        return <Provider store={new RootStore()}>
+        return <Provider store={rootStoreInstance}>
             <React.Fragment>
                 <DevTool/>
                 <Router>

@@ -32,6 +32,7 @@
 en:
   form:
     submit: Save
+    login: Login
 
   link:
     details: Details
@@ -46,3 +47,6 @@ en:
         title: Title
         description: Description
         isbn: ISBN
+      user:
+        email: E-Mail
+        password: Password

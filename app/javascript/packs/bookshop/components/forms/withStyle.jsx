@@ -2,7 +2,7 @@ import * as React from "react";
 import {addCssClass} from "./utils";
 import {Label} from "semantic-ui-react";
 
-const asBootstrapFormInput = (FormInput) => {
+const withStyle = (FormInput) => {
 
     return class extends React.Component {
 
@@ -23,4 +23,4 @@ const asBootstrapFormInput = (FormInput) => {
 
 };
 
-export default asBootstrapFormInput;
+export default withStyle;

@@ -12,8 +12,8 @@
     * I18n support (translations loaded from rails api) ([i18next](https://github.com/i18next/react-i18next))
     * Websocket/Actioncable example included ([react-actioncable-provider](https://github.com/cpunion/react-actioncable-provider))
     * Mobx
-    * (TODO) devise token authentication
-    * (TODO) login/logout
+    * devise token authentication
+    * login/logout
 
 ## Setup
 

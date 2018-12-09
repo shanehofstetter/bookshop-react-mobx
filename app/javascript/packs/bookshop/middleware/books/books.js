@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from '../axios';
 
 const all = () => {
-    return axios.get('/api/v1/books').then(({data}) => data);
+    return axios.get('/api/v1/books').then(({data, headers}) => data);
 };
 
 const byId = (id) => {
