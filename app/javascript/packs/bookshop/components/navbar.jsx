@@ -24,7 +24,7 @@ class NavigationBar extends React.Component {
                                 {
                                     ['de', 'en'].map(locale => {
                                         return <Dropdown.Item key={locale}
-                                                              onClick={() => i18n.changeLanguage(locale)}>{locale}</Dropdown.Item>;
+                                                              onClick={() => this.props.store.configStore.language = locale}>{locale}</Dropdown.Item>;
                                     })
                                 }
                             </Dropdown.Menu>

@@ -20,6 +20,7 @@ i18n
         debug: true,
         whitelist: ['en', 'de'],
         nonExplicitWhitelist: true,
+        load: 'languageOnly',
         interpolation: {
             escapeValue: false, // not needed for react as it escapes by default
         },

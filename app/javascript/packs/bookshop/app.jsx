@@ -23,13 +23,14 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
+        i18n.on('languageChanged', (lng) => {
+            // needed when language changes via path and to change path when language does not change via path
+            this.props.store.configStore.language = lng;
+            this.props.history.push(this.props.location.pathname.replace(/^\/[a-z]{2}\//, `/${lng}/`));
+        });
     }
 
     render() {
-        i18n.on('languageChanged', (lng) => {
-            this.props.history.push(this.props.location.pathname.replace(/^\/[a-z]{2}\//, `/${lng}/`));
-        });
-
         return <I18nextProvider i18n={i18n}>
             <ActionCableProvider url={WS_ROOT}>
                 <AlertProvider template={AlertTemplate} timeout={5000} zIndex={150}>
