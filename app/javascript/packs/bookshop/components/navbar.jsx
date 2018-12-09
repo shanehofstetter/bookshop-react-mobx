@@ -1,21 +1,13 @@
 import * as React from 'react';
 import {withNamespaces} from "react-i18next";
-import {Container, Dropdown, Menu} from "semantic-ui-react";
+import {Container, Dropdown, Icon, Menu} from "semantic-ui-react";
+import {inject, observer} from "mobx-react";
 
+@inject('store')
+@observer
 class NavigationBar extends React.Component {
     constructor(props) {
         super(props);
-
-        this.toggle = this.toggle.bind(this);
-        this.state = {
-            isOpen: false
-        };
-    }
-
-    toggle() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
     }
 
     render() {
@@ -24,14 +16,15 @@ class NavigationBar extends React.Component {
         return (
             <div>
                 <Menu fixed='top' stackable>
+                    <Menu.Item onClick={() => this.props.store.configStore.sidebarVisible = true}><Icon name={'content'}/></Menu.Item>
                     <Container>
                         <Menu.Item header as={'a'} href={'/'}>Bookshop</Menu.Item>
-                        <Dropdown item simple text={i18n.language}>
+                        <Dropdown item simple className={'right'} text={i18n.language}>
                             <Dropdown.Menu>
                                 {
                                     ['de', 'en'].map(locale => {
                                         return <Dropdown.Item key={locale}
-                                                             onClick={() => i18n.changeLanguage(locale)}>{locale}</Dropdown.Item>;
+                                                              onClick={() => i18n.changeLanguage(locale)}>{locale}</Dropdown.Item>;
                                     })
                                 }
                             </Dropdown.Menu>
