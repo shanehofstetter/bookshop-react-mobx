@@ -3,6 +3,9 @@
 module Api
   module V1
     class BooksController < ApiController
+
+      skip_before_action :authenticate_user!, except: [:create]
+
       def index
         render json: Book.all
       end

@@ -3,6 +3,7 @@ import {withNamespaces} from "react-i18next";
 import {Container, Dropdown, Icon, Menu} from "semantic-ui-react";
 import {inject, observer} from "mobx-react";
 import {Link} from "react-router-dom";
+import {route} from "../routing/routing";
 
 @inject('store')
 @observer
@@ -16,12 +17,12 @@ class NavigationBar extends React.Component {
 
         return (
             <div>
-                <Menu stackable style={{borderRadius: 0, border: 'none'}}>
+                <Menu style={{borderRadius: 0, border: 'none'}}>
                     <Menu.Item onClick={() => this.props.store.configStore.sidebarVisible = true}><Icon name={'content'}/></Menu.Item>
                     <Container>
                         <Menu.Item header><Link to={'/'} style={{color: 'inherit'}}>Bookshop</Link></Menu.Item>
-                        <Menu stackable className={'right'} style={{borderRadius: 0, border: 'none', boxShadow: 'none'}}>
-                            { this.props.store.authStore.authenticated ? this.renderUserMenu() : '' }
+                        <Menu className={'right'} style={{borderRadius: 0, border: 'none', boxShadow: 'none'}}>
+                            { this.props.store.authStore.authenticated ? this.renderUserMenu() : this.renderLoginMenu() }
                             <Dropdown item simple className={'right'} text={i18n.language}>
                                 <Dropdown.Menu>
                                     {
@@ -45,6 +46,10 @@ class NavigationBar extends React.Component {
                 <Dropdown.Item onClick={() => this.props.store.authStore.logout()}>Logout</Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>;
+    }
+
+    renderLoginMenu(){
+        return <Menu.Item><Link to={route('/login')} style={{color: 'inherit'}}>Login</Link></Menu.Item>
     }
 }
 

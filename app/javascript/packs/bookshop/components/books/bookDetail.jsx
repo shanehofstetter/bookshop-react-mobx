@@ -1,7 +1,14 @@
 import * as React from 'react';
-import {Api} from '../middleware/api';
+import {Api} from '../../middleware/api';
 import {withAlert} from "react-alert";
+import {Link} from "react-router-dom";
+import {route} from "../../routing/routing";
+import {Button} from "semantic-ui-react";
+import {withNamespaces} from "react-i18next";
+import {inject, observer} from "mobx-react";
 
+@inject('store')
+@observer
 class BookDetail extends React.Component {
 
     constructor(props) {
@@ -13,7 +20,7 @@ class BookDetail extends React.Component {
     }
 
     componentDidMount() {
-        Api.books.byId(this.state.book.id).then(book => {
+        this.props.store.bookStore.loadBook(this.state.book.id).then(book => {
             this.setState({book});
         }).catch(e => {
             console.error(`book with id ${this.state.book.id} not found`);
@@ -22,15 +29,19 @@ class BookDetail extends React.Component {
     }
 
     render() {
+        const {t} = this.props;
         return (
             <div className="book">
                 <p style={{fontWeight: 'bold'}}>{this.state.book.title}</p>
                 <p>{this.state.book.description}</p>
                 <p>isbn: {this.state.book.isbn}</p>
+                <Button primary>
+                    <Link to={route(`/books`)} style={{color: 'inherit'}}>{t('link.back')}</Link>
+                </Button>
             </div>
         )
     }
 
 }
 
-export default withAlert(BookDetail);
+export default withNamespaces('translation')(withAlert(BookDetail));

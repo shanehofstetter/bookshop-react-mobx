@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {withNamespaces} from "react-i18next";
 import {Button, Item, Segment} from "semantic-ui-react";
-import {route} from "../routing/routing";
+import {route} from "../../routing/routing";
 import {Link} from "react-router-dom";
 
 class BookListItem extends React.Component {

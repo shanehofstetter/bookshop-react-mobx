@@ -1,12 +1,13 @@
 import * as React from "react";
 import {withNamespaces} from "react-i18next";
-import {Api} from "../middleware/api";
-import Form from "./forms/form";
-import Text from "./forms/text";
-import TextArea from "./forms/textarea";
+import {Api} from "../../middleware/api";
+import Form from "../forms/form";
+import Text from "../forms/text";
+import TextArea from "../forms/textarea";
 import {withAlert} from "react-alert";
 import {inject, observer} from "mobx-react";
 import {Button} from "semantic-ui-react";
+import {withRouter} from "react-router";
 
 @inject('store')
 @observer
@@ -24,6 +25,9 @@ class BookCreateForm extends React.Component {
             this.formApi.reset();
             this.props.store.bookStore.addBook(book);
             this.props.alert.show(`Book '${book.title}' successfully added.`, {type: 'success'});
+            if (this.props.afterCreatePath) {
+                this.props.history.push(this.props.afterCreatePath);
+            }
         }).catch(formErrors => {
             this.setState({errors: formErrors});
             this.props.alert.show('Book could not be saved.', {type: 'warning'});
@@ -57,4 +61,4 @@ class BookCreateForm extends React.Component {
 const i18nEnhanced = withNamespaces('translation')(BookCreateForm);
 const alertEnhanced = withAlert(i18nEnhanced);
 
-export default alertEnhanced;
+export default withRouter(alertEnhanced);

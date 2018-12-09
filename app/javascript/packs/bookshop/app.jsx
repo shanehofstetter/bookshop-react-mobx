@@ -11,13 +11,12 @@ import {Provider as AlertProvider} from 'react-alert'
 import {WS_ROOT} from "./config";
 import {ActionCableProvider} from 'react-actioncable-provider';
 import NotFound from "./components/notFound";
-import Books from "./components/books";
+import Books from "./components/books/books";
 import {I18nextProvider} from "react-i18next";
 import i18n from './i18n';
 import {Container, Icon, Menu, Sidebar} from "semantic-ui-react";
 import {inject, observer} from "mobx-react";
 import Login from "./components/auth/login";
-import PrivateRoute from "./components/privateRoute"
 
 @inject('store')
 @observer
@@ -53,7 +52,7 @@ class App extends React.Component {
                                 <Switch>
                                     <Redirect exact from={`${this.props.match.url}`}
                                               to={`${this.props.match.url}/books`}/>
-                                    <PrivateRoute path={`${this.props.match.url}/books`} component={Books}/>
+                                    <Route path={`${this.props.match.url}/books`} component={Books}/>
                                     <Route path={`${this.props.match.url}/login`} component={Login}/>
                                     <Route path={`${this.props.match.url}/*`} component={NotFound}/>
                                 </Switch>

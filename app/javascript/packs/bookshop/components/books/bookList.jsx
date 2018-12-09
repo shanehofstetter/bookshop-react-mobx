@@ -1,10 +1,11 @@
 import * as React from 'react';
 import BookListItem from './bookListItem';
 import {withNamespaces} from 'react-i18next';
-import BookCreateForm from "./bookCreateForm";
 import {ActionCable} from 'react-actioncable-provider';
 import {inject, observer} from "mobx-react";
-import {Button, Grid, Item, Placeholder, Segment} from "semantic-ui-react";
+import {Button, Grid, Icon, Item, Placeholder, Segment} from "semantic-ui-react";
+import {Link} from "react-router-dom";
+import {route} from "../../routing/routing";
 
 @inject('store')
 @observer
@@ -38,10 +39,9 @@ class BookList extends React.Component {
                         <h1>{t('activerecord.models.book.other')}</h1>
                     </Grid.Column>
                     <Grid.Column>
-                        <BookCreateForm/>
-                    </Grid.Column>
-                    <Grid.Column>
-                        <Button onClick={() =>  this.props.store.bookStore.loadBooks()}>Reload</Button>
+                        {this.props.store.authStore.authenticated ? this.renderCreateButton() : ''}
+                        <Button icon onClick={() => this.props.store.bookStore.loadBooks()}><Icon
+                            name={'refresh'}/></Button>
                         <Item.Group>
                             {this.props.store.bookStore.isLoading ? this.renderLoading() : this.renderBookList()}
                         </Item.Group>
@@ -51,27 +51,33 @@ class BookList extends React.Component {
         )
     }
 
+    renderCreateButton() {
+        return <Button primary>
+            <Link to={route(`/books/create`)} style={{color: 'inherit'}}>{this.props.t('link.create')}</Link>
+        </Button>
+    }
+
     renderLoading() {
         return <React.Fragment>
             <Segment>
                 <Placeholder>
                     <Placeholder.Header>
-                        <Placeholder.Line />
+                        <Placeholder.Line/>
                     </Placeholder.Header>
                     <Placeholder.Paragraph>
-                        <Placeholder.Line />
-                        <Placeholder.Line />
+                        <Placeholder.Line/>
+                        <Placeholder.Line/>
                     </Placeholder.Paragraph>
                 </Placeholder>
             </Segment>
             <Segment>
                 <Placeholder>
                     <Placeholder.Header>
-                        <Placeholder.Line />
+                        <Placeholder.Line/>
                     </Placeholder.Header>
                     <Placeholder.Paragraph>
-                        <Placeholder.Line />
-                        <Placeholder.Line />
+                        <Placeholder.Line/>
+                        <Placeholder.Line/>
                     </Placeholder.Paragraph>
                 </Placeholder>
             </Segment>

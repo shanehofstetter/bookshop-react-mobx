@@ -36,6 +36,8 @@ en:
 
   link:
     details: Details
+    back: Back
+    create: Create
 
   activerecord:
     models:

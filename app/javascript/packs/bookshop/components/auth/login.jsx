@@ -5,6 +5,7 @@ import {inject, observer} from "mobx-react";
 import Text from "../forms/text";
 import {Button} from "semantic-ui-react";
 import Form from "../forms/form";
+import {withAlert} from "react-alert";
 
 @inject('store')
 @observer
@@ -59,4 +60,4 @@ class Login extends React.Component {
     }
 }
 
-export default withNamespaces('translation')(Login);
+export default withAlert(withNamespaces('translation')(Login));
