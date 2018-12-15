@@ -28,6 +28,11 @@ Setup database:
 $ rails db:setup
 ```
 
+Build Semantic-UI Theme
+```
+$ cd semantic-ui-theme && gulp build
+```
+
 ## Run
 
 ```
