@@ -3,6 +3,9 @@ import Backend from 'i18next-xhr-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { reactI18nextModule } from 'react-i18next';
 
+export const DEFAULT_LANGUAGE = 'de';
+export const AVAILABLE_LANGUAGES = [DEFAULT_LANGUAGE, 'en'];
+
 i18n
 // load translation using xhr -> see /public/locales
 // learn more: https://github.com/i18next/i18next-xhr-backend
@@ -16,9 +19,9 @@ i18n
     // init i18next
     // for all options read: https://www.i18next.com/overview/configuration-options
     .init({
-        fallbackLng: 'en',
+        fallbackLng: DEFAULT_LANGUAGE,
         debug: true,
-        whitelist: ['en', 'de'],
+        whitelist: AVAILABLE_LANGUAGES,
         nonExplicitWhitelist: true,
         load: 'languageOnly',
         interpolation: {

@@ -1,6 +1,7 @@
 import React from 'react'
 import {Route, Redirect, withRouter} from 'react-router-dom'
 import {inject, observer} from "mobx-react";
+import {route} from "../routing/routing";
 
 @inject('store')
 @observer
@@ -19,7 +20,7 @@ class PrivateRoute extends React.Component {
         }
 
         return <Redirect to={{
-            pathname: '/' + this.props.store.configStore.language + '/login',
+            pathname: route('/login'),
             state: {from: props.location}
         }}/>
     }
