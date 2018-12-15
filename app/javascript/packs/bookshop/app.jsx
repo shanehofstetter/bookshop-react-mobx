@@ -25,13 +25,18 @@ class App extends React.Component {
     }
 
     render() {
+        let path = this.props.match.url;
+        if (path === '/') {
+            path = '';
+        }
+
         return <ActionCableProvider url={WS_ROOT}>
             <Switch>
                 <Redirect exact from={`${this.props.match.url}`}
-                          to={`${this.props.match.url}/books`}/>
-                <Route path={`${this.props.match.url}/books`} component={Books}/>
-                <Route path={`${this.props.match.url}/login`} component={Login}/>
-                <Route path={`${this.props.match.url}/*`} component={NotFound}/>
+                          to={`${path}/books`}/>
+                <Route path={`${path}/books`} component={Books}/>
+                <Route path={`${path}/login`} component={Login}/>
+                <Route path={`${path}/*`} component={NotFound}/>
             </Switch>
         </ActionCableProvider>
     }
