@@ -38,6 +38,6 @@ export class ConfigStore {
     }
 
     changeHistory(history, location) {
-        history.push(location.pathname.replace(/^\/[\S]+\//, `/${this._language}/`));
+        history.push(location.pathname.replace(/^\/[a-zA-Z0-9]+\//, `/${this._language}/`));
     }
 }

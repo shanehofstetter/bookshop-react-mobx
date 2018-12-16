@@ -13,10 +13,10 @@ class Books extends React.Component {
     render() {
         const match = this.props.match;
         return <Switch>
-            <Route exact path={`${match.url}`} component={BookList}/>
-            <PrivateRoute exact path={`${match.url}/create`} component={BookCreate}/>
-            <Route exact path={`${match.url}/:id`} component={BookDetail}/>
-            <Route path={`${match.url}/*`} component={NotFound}/>
+            <Route exact path={`${match.path}`} component={BookList}/>
+            <PrivateRoute exact path={`${match.path}/create`} component={BookCreate}/>
+            <Route exact path={`${match.path}/:id`} component={BookDetail}/>
+            <Route path={`${match.path}/*`} component={NotFound}/>
         </Switch>
     }
 }
