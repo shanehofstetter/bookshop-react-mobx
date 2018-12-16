@@ -34,7 +34,7 @@ class NavigationBar extends React.Component {
     }
 
     renderLoginMenu() {
-        return <Menu.Item><Link to={route('/login')} style={{color: 'inherit'}}>Login</Link></Menu.Item>
+        return <Menu.Item as={Link} to={route('/login')}>Login</Menu.Item>
     }
 }
 

@@ -6,7 +6,7 @@ import {Menu} from "semantic-ui-react";
 class HomeMenuItem extends React.Component {
     render() {
         return (
-            <Menu.Item header><Link to={route('/')} style={{color: 'inherit'}}>Bookshop</Link></Menu.Item>
+            <Menu.Item as={Link} to={route('/')} header>Bookshop</Menu.Item>
         );
     }
 }

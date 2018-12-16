@@ -1,9 +1,9 @@
 import * as React from "react";
-import {Icon, Sidebar, Menu} from "semantic-ui-react";
+import {Sidebar, Menu} from "semantic-ui-react";
 import NavigationBar from "./navbar";
 import {inject, observer} from "mobx-react";
-import {route} from "../../routing/routing";
 import HomeMenuItem from "./menu/homeMenuItem";
+import SidebarContent from "./menu/sidebarContent";
 
 @inject('store')
 @observer
@@ -12,6 +12,7 @@ class AppSidebar extends React.Component {
     constructor(props) {
         super(props);
         this.props.store.configStore.mobile = window.innerWidth < 1024;
+        this.closeSidebar = this.closeSidebar.bind(this);
     }
 
     render() {
@@ -28,7 +29,7 @@ class AppSidebar extends React.Component {
         return <Sidebar as={Menu} animation='push' icon='labeled' inverted vertical
                         visible={this.props.store.configStore.sidebarVisible}
                         width='thin'>
-            {this.renderSidebarContent()}
+            <SidebarContent onNavigate={this.closeSidebar}/>
         </Sidebar>
     }
 
@@ -36,17 +37,14 @@ class AppSidebar extends React.Component {
         return <Menu vertical inverted
                      style={{position: 'fixed', height: '100%', borderRadius: 0}}>
             <HomeMenuItem/>
-            {this.renderSidebarContent()}
+            <SidebarContent/>
         </Menu>
     }
 
-    renderSidebarContent() {
-        return <React.Fragment>
-            <Menu.Item as='a' href={route('/')}>
-                <Icon name='home'/>
-                Home
-            </Menu.Item>
-        </React.Fragment>;
+    closeSidebar() {
+        if (this.props.store.configStore.mobile) {
+            this.props.store.configStore.sidebarVisible = false;
+        }
     }
 }
 
