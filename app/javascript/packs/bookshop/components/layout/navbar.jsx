@@ -1,10 +1,12 @@
 import * as React from 'react';
 import {withNamespaces} from "react-i18next";
-import {Container, Dropdown, Icon, Menu} from "semantic-ui-react";
+import {Container, Menu} from "semantic-ui-react";
 import {inject, observer} from "mobx-react";
 import {Link} from "react-router-dom";
 import {route} from "../../routing/routing";
-import {AVAILABLE_LANGUAGES} from "../../i18n";
+import SidebarToggle from "./menu/sidebarToggle";
+import LanguageDropdown from "./menu/languageDropdown";
+import UserMenu from "./menu/userMenu";
 
 @inject('store')
 @observer
@@ -14,26 +16,15 @@ class NavigationBar extends React.Component {
     }
 
     render() {
-        const i18n = this.props.i18n;
-
         return (
             <div>
                 <Menu style={{borderRadius: 0, border: 'none'}}>
-                    <Menu.Item onClick={() => this.props.store.configStore.sidebarVisible = true}><Icon name={'content'}/></Menu.Item>
-                    <Container>
-                        <Menu.Item header><Link to={route('/')} style={{color: 'inherit'}}>Bookshop</Link></Menu.Item>
+                    {this.props.store.configStore.mobile ? <SidebarToggle/> : ''}
+                    <Container style={{width: '100%'}}>
+                        {this.props.store.configStore.mobile ? <Menu.Item header><Link to={route('/')} style={{color: 'inherit'}}>Bookshop</Link></Menu.Item> : ''}
                         <Menu className={'right'} style={{borderRadius: 0, border: 'none', boxShadow: 'none'}}>
-                            { this.props.store.authStore.authenticated ? this.renderUserMenu() : this.renderLoginMenu() }
-                            <Dropdown item simple className={'right'} text={this.props.store.configStore.language}>
-                                <Dropdown.Menu>
-                                    {
-                                        AVAILABLE_LANGUAGES.map(locale => {
-                                            return <Dropdown.Item key={locale}
-                                                                  onClick={() => this.props.store.configStore.language = locale}>{locale}</Dropdown.Item>;
-                                        })
-                                    }
-                                </Dropdown.Menu>
-                            </Dropdown>
+                            {this.props.store.authStore.authenticated ? <UserMenu/> : this.renderLoginMenu()}
+                            <LanguageDropdown/>
                         </Menu>
                     </Container>
                 </Menu>
@@ -41,15 +32,7 @@ class NavigationBar extends React.Component {
         );
     }
 
-    renderUserMenu(){
-        return <Dropdown item simple className={'right'} text={this.props.store.authStore.user.email}>
-            <Dropdown.Menu>
-                <Dropdown.Item onClick={() => this.props.store.authStore.logout()}>Logout</Dropdown.Item>
-            </Dropdown.Menu>
-        </Dropdown>;
-    }
-
-    renderLoginMenu(){
+    renderLoginMenu() {
         return <Menu.Item><Link to={route('/login')} style={{color: 'inherit'}}>Login</Link></Menu.Item>
     }
 }

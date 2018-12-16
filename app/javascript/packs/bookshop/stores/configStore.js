@@ -1,4 +1,4 @@
-import {observable} from "mobx";
+import {observable, action, computed} from "mobx";
 import i18n, {AVAILABLE_LANGUAGES, DEFAULT_LANGUAGE} from "../i18n";
 
 export class ConfigStore {
@@ -8,14 +8,15 @@ export class ConfigStore {
     }
 
     @observable _language = DEFAULT_LANGUAGE;
-    @observable _sidebarVisible = false;
+    @observable sidebarVisible = false;
+    @observable mobile = false;
 
-    get sidebarVisible() {
-        return this._sidebarVisible;
+    @computed get desktop() {
+        return !this.mobile;
     }
 
-    set sidebarVisible(visible) {
-        this._sidebarVisible = visible;
+    @action toggleSidebar() {
+        this.sidebarVisible = !this.sidebarVisible;
     }
 
     get language() {
