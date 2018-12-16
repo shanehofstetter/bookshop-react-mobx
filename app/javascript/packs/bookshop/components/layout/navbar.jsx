@@ -7,6 +7,7 @@ import {route} from "../../routing/routing";
 import SidebarToggle from "./menu/sidebarToggle";
 import LanguageDropdown from "./menu/languageDropdown";
 import UserMenu from "./menu/userMenu";
+import HomeMenuItem from "./menu/homeMenuItem";
 
 @inject('store')
 @observer
@@ -21,7 +22,7 @@ class NavigationBar extends React.Component {
                 <Menu style={{borderRadius: 0, border: 'none'}}>
                     {this.props.store.configStore.mobile ? <SidebarToggle/> : ''}
                     <Container style={{width: '100%'}}>
-                        {this.props.store.configStore.mobile ? <Menu.Item header><Link to={route('/')} style={{color: 'inherit'}}>Bookshop</Link></Menu.Item> : ''}
+                        {this.props.store.configStore.mobile ? <HomeMenuItem/> : ''}
                         <Menu className={'right'} style={{borderRadius: 0, border: 'none', boxShadow: 'none'}}>
                             {this.props.store.authStore.authenticated ? <UserMenu/> : this.renderLoginMenu()}
                             <LanguageDropdown/>

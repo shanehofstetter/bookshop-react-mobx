@@ -3,7 +3,7 @@ import {Icon, Sidebar, Menu} from "semantic-ui-react";
 import NavigationBar from "./navbar";
 import {inject, observer} from "mobx-react";
 import {route} from "../../routing/routing";
-import {Link} from "react-router-dom";
+import HomeMenuItem from "./menu/homeMenuItem";
 
 @inject('store')
 @observer
@@ -35,7 +35,7 @@ class AppSidebar extends React.Component {
     renderFixedMenu() {
         return <Menu vertical inverted
                      style={{position: 'fixed', height: '100%', borderRadius: 0}}>
-            <Menu.Item header><Link to={route('/')} style={{color: 'inherit'}}>Bookshop</Link></Menu.Item>
+            <HomeMenuItem/>
             {this.renderSidebarContent()}
         </Menu>
     }
