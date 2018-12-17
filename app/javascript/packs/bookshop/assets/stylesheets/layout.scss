@@ -1,10 +1,6 @@
 $sidebarWidth: 15rem;
 $topNavbarHeight: 40px;
 
-body ::-webkit-scrollbar {
-  width: 2px !important;
-}
-
 #bookshop-app {
   height: 100%;
 
@@ -62,7 +58,7 @@ body ::-webkit-scrollbar {
 
   &.mobile {
     height: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
   }
 }

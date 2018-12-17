@@ -11,8 +11,9 @@ class AppSidebar extends React.Component {
 
     constructor(props) {
         super(props);
-        this.props.store.configStore.mobile = window.innerWidth < 1024;
+
         this.closeSidebar = this.closeSidebar.bind(this);
+        this.updateLayoutMode = this.updateLayoutMode.bind(this);
     }
 
     render() {
@@ -60,6 +61,19 @@ class AppSidebar extends React.Component {
         if (this.props.store.configStore.mobile) {
             this.props.store.configStore.sidebarVisible = false;
         }
+    }
+
+    componentDidMount() {
+        this.updateLayoutMode();
+        window.addEventListener('resize', this.updateLayoutMode);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateLayoutMode);
+    }
+
+    updateLayoutMode() {
+        this.props.store.configStore.mobile = window.innerWidth < 768;
     }
 }
 
