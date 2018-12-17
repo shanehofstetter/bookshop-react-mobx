@@ -1,13 +1,18 @@
 import * as React from "react";
-import {withNamespaces} from "react-i18next";
+import {ExampleTable} from "./exampleTable";
+import {ExampleList} from "./exampleList";
+import {ExampleStatistics} from "./exampleStatistics";
 
 class Dashboard extends React.Component {
     render() {
-        const {t} = this.props;
         return (
-            <h1>{t('link.home')}</h1>
+            <React.Fragment>
+                <ExampleStatistics/>
+                <ExampleTable/>
+                <ExampleList/>
+            </React.Fragment>
         );
     }
 }
 
-export default withNamespaces('translation')(Dashboard);
+export default Dashboard;

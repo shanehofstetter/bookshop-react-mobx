@@ -1,0 +1,16 @@
+.ui.list {
+  & > .item {
+
+    padding: 10px;
+
+    .content {
+      .description {
+        margin-top: 5px;
+      }
+    }
+
+    & > img.image {
+      margin-right: 10px;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 $sidebarWidth: 15rem;
-$topNavbarHeight: 40px;
+$topNavbarHeight: 60px;
 
 #bookshop-app {
   height: 100%;
@@ -7,8 +7,19 @@ $topNavbarHeight: 40px;
   .pushable {
     padding-top: $topNavbarHeight !important;
     transform: none;
+
     .pusher {
       height: 100%;
+    }
+  }
+
+  .header.item.brand {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: $topNavbarHeight;
+
+    * {
+      line-height: $topNavbarHeight;
     }
   }
 }
@@ -50,15 +61,20 @@ $topNavbarHeight: 40px;
 }
 
 .app-container {
-  padding: 10px 10px 10px 10px;
+  padding: 30px;
 
   &.desktop {
-    padding-top: calc(10px + #{$topNavbarHeight});
+    padding-top: calc(30px + #{$topNavbarHeight});
   }
 
   &.mobile {
+    padding: 10px;
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
   }
+}
+
+.ui.menu.fixed-sidebar {
+  z-index: 10;
 }

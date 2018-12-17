@@ -6,7 +6,9 @@ import {Menu} from "semantic-ui-react";
 class HomeMenuItem extends React.Component {
     render() {
         return (
-            <Menu.Item as={Link} to={route('/')} header>Bookshop</Menu.Item>
+            <Menu.Item as={Link} to={route('/')} header className={'brand'}>
+                <span>Bookshop</span>
+            </Menu.Item>
         );
     }
 }
