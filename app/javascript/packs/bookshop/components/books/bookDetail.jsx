@@ -35,8 +35,8 @@ class BookDetail extends React.Component {
                 <p style={{fontWeight: 'bold'}}>{this.state.book.title}</p>
                 <p>{this.state.book.description}</p>
                 <p>isbn: {this.state.book.isbn}</p>
-                <Button primary>
-                    <Link to={route(`/books`)} style={{color: 'inherit'}}>{t('link.back')}</Link>
+                <Button primary as={Link} to={route(`/books`)}>
+                    {t('link.back')}
                 </Button>
             </div>
         )

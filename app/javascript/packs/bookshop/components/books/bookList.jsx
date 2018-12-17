@@ -3,9 +3,10 @@ import BookListItem from './bookListItem';
 import {withNamespaces} from 'react-i18next';
 import {ActionCable} from 'react-actioncable-provider';
 import {inject, observer} from "mobx-react";
-import {Button, Grid, Icon, Item, Placeholder, Segment} from "semantic-ui-react";
+import {Button, Grid, Icon, Item} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import {route} from "../../routing/routing";
+import BookPlaceholder from "./bookPlaceholder";
 
 @inject('store')
 @observer
@@ -52,35 +53,16 @@ class BookList extends React.Component {
     }
 
     renderCreateButton() {
-        return <Button primary>
-            <Link to={route(`/books/create`)} style={{color: 'inherit'}}>{this.props.t('link.create')}</Link>
+        return <Button primary as={Link} to={route(`/books/create`)}>
+            {this.props.t('link.create')}
         </Button>
     }
 
     renderLoading() {
         return <React.Fragment>
-            <Segment>
-                <Placeholder>
-                    <Placeholder.Header>
-                        <Placeholder.Line/>
-                    </Placeholder.Header>
-                    <Placeholder.Paragraph>
-                        <Placeholder.Line/>
-                        <Placeholder.Line/>
-                    </Placeholder.Paragraph>
-                </Placeholder>
-            </Segment>
-            <Segment>
-                <Placeholder>
-                    <Placeholder.Header>
-                        <Placeholder.Line/>
-                    </Placeholder.Header>
-                    <Placeholder.Paragraph>
-                        <Placeholder.Line/>
-                        <Placeholder.Line/>
-                    </Placeholder.Paragraph>
-                </Placeholder>
-            </Segment>
+            <BookPlaceholder/>
+            <BookPlaceholder/>
+            <BookPlaceholder/>
         </React.Fragment>;
     }
 

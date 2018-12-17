@@ -18,18 +18,16 @@ class NavigationBar extends React.Component {
 
     render() {
         return (
-            <div>
-                <Menu style={{borderRadius: 0, border: 'none'}}>
+                <Menu id={'navbar'} className={'fixed ' + (this.props.store.configStore.mobile ? 'mobile' : 'desktop')}>
                     {this.props.store.configStore.mobile ? <SidebarToggle/> : ''}
-                    <Container style={{width: '100%'}}>
+                    <Container>
                         {this.props.store.configStore.mobile ? <HomeMenuItem/> : ''}
-                        <Menu className={'right'} style={{borderRadius: 0, border: 'none', boxShadow: 'none'}}>
+                        <Menu className={'right'}>
                             {this.props.store.authStore.authenticated ? <UserMenu/> : this.renderLoginMenu()}
                             <LanguageDropdown/>
                         </Menu>
                     </Container>
                 </Menu>
-            </div>
         );
     }
 

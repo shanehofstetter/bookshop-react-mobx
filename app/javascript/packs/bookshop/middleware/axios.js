@@ -14,10 +14,17 @@ instance.interceptors.request.use(function (config) {
 }, error => Promise.reject(error));
 
 instance.interceptors.response.use(function (response) {
-    if (response.headers && response.headers["access-token"]) {
-        rootStoreInstance.authStore.updateAuthToken(response.headers["access-token"]);
-    }
+    tryToUpdateAuthTokenFromHeaders(response.headers);
     return response;
-}, (error) => Promise.reject(error));
+}, (error) => {
+    tryToUpdateAuthTokenFromHeaders(error.response.headers);
+    return Promise.reject(error);
+});
+
+const tryToUpdateAuthTokenFromHeaders = (headers) => {
+    if (headers && headers["access-token"]) {
+        rootStoreInstance.authStore.updateAuthToken(headers["access-token"]);
+    }
+};
 
 export default instance;

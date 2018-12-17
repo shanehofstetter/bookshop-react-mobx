@@ -1,0 +1,68 @@
+$sidebarWidth: 15rem;
+$topNavbarHeight: 40px;
+
+body ::-webkit-scrollbar {
+  width: 2px !important;
+}
+
+#bookshop-app {
+  height: 100%;
+
+  .pushable {
+    padding-top: $topNavbarHeight !important;
+    transform: none;
+    .pusher {
+      height: 100%;
+    }
+  }
+}
+
+.ui.visible.left.sidebar ~ .fixed, .ui.visible.left.sidebar ~ .pusher {
+  transform: translate3d($sidebarWidth, 0, 0);
+}
+
+#navbar {
+  border-radius: 0;
+  border: none;
+  margin: 0;
+
+  &.desktop {
+    left: $sidebarWidth;
+    width: calc(100% - #{$sidebarWidth});
+  }
+
+  .ui.container {
+    width: 100%;
+
+    .ui.menu.right {
+      border-radius: 0;
+      border: none;
+      box-shadow: none
+    }
+  }
+}
+
+.desktop-content-wrapper {
+  margin-left: $sidebarWidth;
+}
+
+.ui.menu.vertical.fixed-sidebar {
+  position: fixed;
+  height: 100%;
+  border-radius: 0;
+  margin: 0;
+}
+
+.app-container {
+  padding: 10px 10px 10px 10px;
+
+  &.desktop {
+    padding-top: calc(10px + #{$topNavbarHeight});
+  }
+
+  &.mobile {
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+}

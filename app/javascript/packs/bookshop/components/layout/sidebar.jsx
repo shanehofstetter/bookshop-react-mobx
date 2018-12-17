@@ -16,10 +16,26 @@ class AppSidebar extends React.Component {
     }
 
     render() {
-        return <Sidebar.Pushable>
-            {this.props.store.configStore.mobile ? this.renderSidebar() : this.renderFixedMenu()}
-            <Sidebar.Pusher style={{marginLeft: this.props.store.configStore.mobile ? '0' : '15rem'}}>
+        return <React.Fragment>
+            {this.props.store.configStore.mobile ? this.renderMobile() : this.renderDesktop()}
+        </React.Fragment>
+    }
+
+    renderDesktop() {
+        return <React.Fragment>
+            {this.renderFixedMenu()}
+            <div className={'desktop-content-wrapper'}>
                 <NavigationBar/>
+                {this.props.children}
+            </div>
+        </React.Fragment>
+    }
+
+    renderMobile() {
+        return <Sidebar.Pushable>
+            {this.renderSidebar()}
+            <NavigationBar/>
+            <Sidebar.Pusher>
                 {this.props.children}
             </Sidebar.Pusher>
         </Sidebar.Pushable>
@@ -34,8 +50,7 @@ class AppSidebar extends React.Component {
     }
 
     renderFixedMenu() {
-        return <Menu vertical inverted
-                     style={{position: 'fixed', height: '100%', borderRadius: 0}}>
+        return <Menu className={'fixed-sidebar'} vertical inverted>
             <HomeMenuItem/>
             <SidebarContent/>
         </Menu>

@@ -8,6 +8,7 @@ import {withAlert} from "react-alert";
 import {inject, observer} from "mobx-react";
 import {Button} from "semantic-ui-react";
 import {withRouter} from "react-router";
+import DateTimePicker from '../forms/dateTimePicker';
 
 @inject('store')
 @observer
@@ -52,6 +53,10 @@ class BookCreateForm extends React.Component {
             <div className={'field'}>
                 <label htmlFor={'isbn'}>{t('activerecord.attributes.book.isbn')}*</label>
                 <Text field="isbn" id={'isbn'} errors={this.state.errors.isbn}/>
+            </div>
+            <div className={'field'}>
+                <label htmlFor={'published_at'}>{t('activerecord.attributes.book.published_at')}</label>
+                <DateTimePicker field={'published_at'} id={'published_at'}/>
             </div>
             <Button type="submit">{t('form.submit')}</Button>
         </Form>

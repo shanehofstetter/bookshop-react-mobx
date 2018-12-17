@@ -18,8 +18,8 @@ class BookListItem extends React.Component {
                     <Item.Content>
                         <Item.Header>{this.props.book.title}</Item.Header>
                         <Item.Description>{this.props.book.description}</Item.Description>
-                        <Button primary style={{marginTop: 10}}>
-                            <Link to={route(`/books/${this.props.book.id}`)} style={{color: 'inherit'}}>{t('link.details')}</Link>
+                        <Button primary style={{marginTop: 10}} as={Link} to={route(`/books/${this.props.book.id}`)}>
+                            {t('link.details')}
                         </Button>
                     </Item.Content>
                 </Item>

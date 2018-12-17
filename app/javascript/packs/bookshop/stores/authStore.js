@@ -21,6 +21,7 @@ export class AuthStore {
             this.user.email = email;
             this.user.expiry = expiry;
             this.user.client = client;
+            this.authenticated = true;
             this.validateToken();
         }
     }
